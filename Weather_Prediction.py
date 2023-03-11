@@ -11,9 +11,7 @@ def wrangle(df):
     df = df.drop(columns=["LandAverageTemperatureUncertainty", "LandMaxTemperatureUncertainty",
                           "LandMinTemperatureUncertainty", "LandAndOceanAverageTemperatureUncertainty"], axis=1)
 						  
-
-
-def converttemp(x):
+    def converttemp(x):
         x = (x * 1.8) + 32
         return float(x)
     df["LandAverageTemperature"] = df["LandAverageTemperature"].apply(converttemp)
@@ -25,7 +23,7 @@ def converttemp(x):
     df["Year"] = df["dt"].dt.year
     df = df.drop("dt", axis=1)
     df = df.drop("Month", axis=1)
-    df = df[df.Year &gt;= 1850]
+    df = df[df["Year"] >= 1850]
     df = df.set_index(["Year"])
     df = df.dropna()
     return df
@@ -57,9 +55,10 @@ from sklearn.metrics import mean_squared_error
 ypred = [ytrain.mean()] * len(ytrain)
 print("Baseline MAE: ", round(mean_squared_error(ytrain, ypred), 5))
 
-
+from sklearn.pipeline import make_pipeline
 from sklearn.feature_selection import SelectKBest
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
 forest = make_pipeline(
     SelectKBest(k="all"),
     StandardScaler(),
@@ -70,7 +69,8 @@ forest = make_pipeline(
         n_jobs=-1
     )
 )
-forest.fit(xtrain, ytrain)
+model=forest.fit(xtrain, ytrain)
+ypred=model.predict(xval)
 
 
 import numpy as np
