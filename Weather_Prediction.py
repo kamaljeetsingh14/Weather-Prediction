@@ -1,5 +1,5 @@
 import pandas as pd
-global_temp = pd.read_csv("GlobalTemperatures.csv")
+global_temp = pd.read_csv("Temperature.csv")
 print(global_temp.shape)
 print(global_temp.columns)
 print(global_temp.info())
