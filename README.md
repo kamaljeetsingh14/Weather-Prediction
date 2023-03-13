@@ -10,7 +10,7 @@ dataframe from being damaged, we want to create a clone of it. After that, we'll
 Columns with a high cardinality are those whose values are extremely uncommon or singular. Given the prevalence of high cardinality data in most time-series datasets,
 we will immediately address this issue by eliminating all high cardinality columns from our dataset in order to prevent future confusion in our model.
 
-2. By developing a method, we turned temperature and the columns into DateTime objects. after invoking our wrangle function on it, a cleaned-up version of our global 
+2. By developing a method, we turned dt into DateTime objects. after invoking our wrangle function on it, a cleaned-up version of our global 
 temp dataframe with no missing values.
 
 3. Visualization
@@ -26,7 +26,7 @@ Now, using scikit-train test split learn's technique, we divided the data in ord
 
 6. Baseline Mean Absolute Error
 We must first set a baseline, a reasonable metric that we want to outperform using our model, before we can make and assess any predictions using our machine learning
-model to forecast the weather. We should try an alternative model or acknowledge that machine learning is not a good fit for our situation if our model cannot 
+model to forecast the weather. We should try an alternative model or acknowledge that our current model is not a good fit for our situation if our model cannot 
 improve from the starting point.
 
 7.Now using machine learning to predict the weather We will develop a Random Forest algorithm that can carry out both the classification and regression tasks. 
